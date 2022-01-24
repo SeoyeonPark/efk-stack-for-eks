@@ -54,7 +54,7 @@ data:
         Path              /var/log/containers/*.log
         Parser            docker
         DB                /var/log/flb_kube.db
-        Mem_Buf_Limit     10MB
+        Mem_Buf_Limit     50MB
         Skip_Long_Lines   On
         Refresh_Interval  10
 
@@ -68,6 +68,7 @@ data:
         Kube_Tag_Prefix     kube.var.log.containers.
         Merge_Log           On
         Merge_Log_Key       log_processed
+        Merge_Log_Trim      On
         K8S-Logging.Parser  On
         K8S-Logging.Exclude Off
 
@@ -84,6 +85,8 @@ data:
         Logstash_Format On
         Logstash_Prefix fluentbit
         Logstash_DateFormat %Y.%m.%d
+        Replace_Dots    On
+        Trace_Error     On
 
   parsers.conf: |
     [PARSER]
